@@ -1,32 +1,5 @@
 "use strict";
 
-const readline = require("readline");
-const chalk = require("chalk");
-
-const prompt = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-// Utilities
-function input(self, str = "> ") {
-    prompt.question(str, (value) => {
-        const result = self.process(value);
-        if(result.answer) {
-            process.stdout.write(chalk.yellow(result.answer) + "\n");
-            if(value.includes("hejdå")) {
-                prompt.close();
-                process.exit();
-            }
-            input(self, str);
-        } else {
-            process.stdout.write("Förlåt men jag förstår dig inte, kan du omformulera dig?" + "\n");
-            input(self, str);
-        }
-    });
-    // prompt.close();
-}
-
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -115,10 +88,6 @@ class Simple_Nlp {
         result.possibleAnswers = flattenArray(result.possibleAnswers);
         result.answer = result.possibleAnswers[randomBetween(0, result.possibleAnswers.length - 1)];
         return result;
-    }
-
-    converse() {
-        input(this);
     }
 }
 

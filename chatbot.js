@@ -9,6 +9,5 @@ markers.forEach((answere)=>{
 })
 
 bot.train();
-bot.converse();
 
 module.exports = bot;
