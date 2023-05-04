@@ -4,6 +4,7 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+
 function flattenArray(arr) {
     let result = [];
     arr.forEach(i => {
@@ -37,13 +38,18 @@ class Simple_Nlp {
         this.__Rules = Object.create(null);
         this.__Answers = Object.create(null);
         this.__Events = Object.create(null);
+    }
 
-        // Bind methods
-        /*this.addRule = this.addRule.bind(this);
-        this.addAnswer = this.addAnswer.bind(this);
-        this.train = this.train.bind(this);
-        this.process = this.process.bind(this);
-        this.converse = this.converse.bind(this);*/
+    set rules(rules){
+        rules.forEach((rule)=>{
+            addRule(rule.rule, rule.marker);
+        })
+        
+    }
+    set markers(markers){
+        markers.forEach((answere)=>{
+            addAnswer(answere.marker, answere.answer);
+        })
     }
 
     // Use String.raw to create string using
