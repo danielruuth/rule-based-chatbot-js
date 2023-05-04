@@ -39,11 +39,11 @@ class Simple_Nlp {
         this.__Events = Object.create(null);
 
         // Bind methods
-        this.addRule = this.addRule.bind(this);
+        /*this.addRule = this.addRule.bind(this);
         this.addAnswer = this.addAnswer.bind(this);
         this.train = this.train.bind(this);
         this.process = this.process.bind(this);
-        this.converse = this.converse.bind(this);
+        this.converse = this.converse.bind(this);*/
     }
 
     // Use String.raw to create string using
