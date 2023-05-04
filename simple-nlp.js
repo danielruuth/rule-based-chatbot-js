@@ -54,13 +54,13 @@ class Simple_Nlp {
 
     set rules(rules){
         rules.forEach((rule)=>{
-            addRule(rule.rule, rule.marker);
+            this.addRule(rule.rule, rule.marker);
         })
         
     }
     set markers(markers){
         markers.forEach((answere)=>{
-            addAnswer(answere.marker, answere.answer);
+            this.addAnswer(answere.marker, answere.answer);
         })
     }
 
