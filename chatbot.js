@@ -1,4 +1,4 @@
-const {bot} = require("./simple-nlp");
+import {bot} from "./simple-nlp"
 const {rules, markers} = require("./rules");
 
 rules.forEach((rule)=>{

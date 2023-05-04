@@ -92,7 +92,5 @@ class Simple_Nlp {
 }
 
 const nlp = new Simple_Nlp();
-module.exports = {
-    bot: nlp,
-    r: String.raw
-};
+export const bot = nlp;
+export const r = String.raw;

@@ -1,4 +1,4 @@
-const rules = [
+const __rules = [
     {rule: "hej", marker: "greeting.hi"},
     { rule: "hejsan", marker: "greeting.hi"},
     { rule: "god dag", marker: "greetings.hi"},
@@ -9,7 +9,7 @@ const rules = [
     
 ]
 
-const markers = [
+const __markers = [
     { marker: "greeting.hi", answer: "Tjenare hur är läget?"},
     { marker: "greeting.hi", answer: "Hej!"},
     { marker: "greeting.hi", answer: "Hej, hur kan jag hjälpa dig idag?"},
@@ -26,7 +26,5 @@ const markers = [
     { marker: "proceed.no", answer: "Hoppsan då förstod jag kanske inte", event: true},
 ]
 
-module.exports = {
-    rules:rules, 
-    markers:markers
-};
+export const rules = __rules;
+export const markers = __markers;
