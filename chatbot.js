@@ -1,2 +1,2 @@
-import {bot} from "./simple-nlp"
+import {bot} from "."
 module.exports = bot;

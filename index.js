@@ -1,5 +1,3 @@
-"use strict";
-
 function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -27,17 +25,14 @@ function processData(match, templates) {
 }
 
 /**
- *  @description A simple example of nlp functions for building chatbots
+ *  @description An example of using regex to make a rule based chat bot
  *
  */
-
-
-class Simple_Nlp {
+class Chatbot {
     constructor() {
-        this.__Markers = Object.create(null);
-        this.__Rules = Object.create(null);
-        this.__Answers = Object.create(null);
-        this.__Events = Object.create(null);
+        this.__Markers = {};
+        this.__Rules = {};
+        this.__Answers = {};
         this.__Manuscript = []
         this.__onScriptedThread = false;
         this.__scriptDoneCallback = null;
@@ -61,23 +56,21 @@ class Simple_Nlp {
     }
     set markers(markers){
         markers.forEach((answer)=>{
-            this.addAnswer(answer.marker, answer.answer, answer.event || false, answer.options || false);
+            this.addAnswer(answer.marker, answer.answer, answer.options || false);
         })
     }
 
-    // Use String.raw to create string using
     addRule(rule, marker) {
         this.__Markers[marker] ? this.__Markers[marker] += `|${rule}` : this.__Markers[marker] = rule;
         if(!this.__Answers[marker]) this.__Answers[marker] = Array();
     }
 
-    addAnswer(marker, answer, event = false, options = false) {
+    addAnswer(marker, answer, options = false) {
         if(!this.__Answers[marker]) throw new Error(`Sorry '${marker} does not exist`);
         this.__Answers[marker].push(answer);
-        if(event){
-            this.__Events[marker].push(marker)
-        }
+        
         if(options){
+            if(!this.__Options[marker]) this.__Options[marker] = []
             this.__Options[marker].push(options)
         }
     }
@@ -111,11 +104,6 @@ class Simple_Nlp {
                     result.classifications[marker] = match;
                     result.possibleAnswers.push(processData(match, this.__Answers[marker]))
                     result.options = this.__Options[marker] || false
-                    //Cast an event
-                    if(this.__Events[marker]){
-                        console.log('Dispatching event')
-                        dispatchEvent(`on${this.__Events[marker]}`)
-                    }
                 }
             }
             result.possibleAnswers = flattenArray(result.possibleAnswers);
@@ -125,6 +113,6 @@ class Simple_Nlp {
     }
 }
 
-const nlp = new Simple_Nlp();
-export const bot = nlp;
+const cbot = new Chatbot();
+export const bot = cbot;
 export const r = String.raw;
