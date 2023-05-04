@@ -40,7 +40,8 @@ class Simple_Nlp {
         this.__Events = Object.create(null);
         this.__Manuscript = []
         this.__onScriptedThread = false;
-        this.__scriptDoneCallback = null
+        this.__scriptDoneCallback = null;
+        this.__Options = []
     }
 
     set manuscript(questions){
@@ -59,8 +60,8 @@ class Simple_Nlp {
         
     }
     set markers(markers){
-        markers.forEach((answere)=>{
-            this.addAnswer(answere.marker, answere.answer);
+        markers.forEach((answer)=>{
+            this.addAnswer(answer.marker, answer.answer, answer.event || false, answer.options || false);
         })
     }
 
@@ -70,11 +71,14 @@ class Simple_Nlp {
         if(!this.__Answers[marker]) this.__Answers[marker] = Array();
     }
 
-    addAnswer(marker, answer, event = false) {
+    addAnswer(marker, answer, event = false, options = false) {
         if(!this.__Answers[marker]) throw new Error(`Sorry '${marker} does not exist`);
         this.__Answers[marker].push(answer);
         if(event){
             this.__Events[marker].push(marker)
+        }
+        if(options){
+            this.__Options[marker].push(options)
         }
     }
 
@@ -106,6 +110,7 @@ class Simple_Nlp {
                 if(match) {
                     result.classifications[marker] = match;
                     result.possibleAnswers.push(processData(match, this.__Answers[marker]))
+                    result.options = this.__Options[marker] || false
                     //Cast an event
                     if(this.__Events[marker]){
                         console.log('Dispatching event')
